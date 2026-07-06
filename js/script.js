@@ -29,10 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.classList.toggle('active', isOpen);
   });
 
-  // Close mobile nav after clicking a link
+  // Close mobile nav after clicking a link (but not the dropdown's own toggle trigger)
   mainNav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       if (window.innerWidth <= 780) {
+        if (link.parentElement.classList.contains('has-dropdown')) return;
         mainNav.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
       }
@@ -46,6 +47,22 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         trigger.parentElement.classList.toggle('open');
       }
+    });
+  });
+
+  // Order Online button dropdowns (click-to-toggle, click-outside-to-close)
+  document.querySelectorAll('.order-toggle').forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const parent = toggle.parentElement;
+      const wasOpen = parent.classList.contains('open');
+      document.querySelectorAll('.order-dropdown.open').forEach(el => el.classList.remove('open'));
+      parent.classList.toggle('open', !wasOpen);
+    });
+  });
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('.order-dropdown.open').forEach(el => {
+      if (!el.contains(e.target)) el.classList.remove('open');
     });
   });
 
@@ -130,9 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.gallery-tile').forEach(tile => {
     tile.addEventListener('click', () => {
+      const photo = tile.querySelector('.tile-photo');
+      const photoLoaded = photo && photo.style.display !== 'none' && photo.complete && photo.naturalWidth > 0;
       const artClass = tile.querySelector('.tile-art').className.split(' ').find(c => c.startsWith('art-'));
       lightboxArt.className = 'lightbox-art';
-      lightboxArt.innerHTML = `<div class="${artClass}" style="width:100%;height:100%;"></div>`;
+      if (photoLoaded) {
+        lightboxArt.innerHTML = `<img src="${photo.src}" alt="">`;
+      } else {
+        lightboxArt.innerHTML = `<div class="${artClass}" style="width:100%;height:100%;"></div>`;
+      }
       lightboxCaption.textContent = tile.dataset.caption || '';
       lightbox.classList.add('open');
     });
