@@ -35,11 +35,9 @@
         <li class="has-dropdown">
           <a href="#menu">Menu <span class="caret">▾</span></a>
           <ul class="dropdown">
-            <li><a href="#menu" data-cat="beef">Beef Suya</a></li>
-            <li><a href="#menu" data-cat="chicken">Chicken Suya</a></li>
+            <li><a href="#menu" data-cat="suya">Suya &amp; Jollof</a></li>
             <li><a href="#menu" data-cat="kilishi">Kilishi</a></li>
-            <li><a href="#menu" data-cat="platters">Family Platters</a></li>
-            <li><a href="#menu" data-cat="sides">Jollof &amp; Sides</a></li>
+            <li><a href="#menu" data-cat="pans">Whole Pans (Catering)</a></li>
           </ul>
         </li>
         <li><a href="#catering">Catering</a></li>
@@ -158,58 +156,62 @@
     <p class="section-sub center">Tap a category to see what's on the grill.</p>
 
     <div class="menu-tabs" role="tablist">
-      <button class="tab-btn active" data-cat="beef">🥩 Beef Suya</button>
-      <button class="tab-btn" data-cat="chicken">🍗 Chicken Suya</button>
+      <button class="tab-btn active" data-cat="suya">🥩 Suya &amp; Jollof</button>
       <button class="tab-btn" data-cat="kilishi">🥓 Kilishi</button>
-      <button class="tab-btn" data-cat="platters">🍽️ Family Platters</button>
-      <button class="tab-btn" data-cat="sides">🍚 Jollof &amp; Sides</button>
+      <button class="tab-btn" data-cat="pans">🍽️ Whole Pans (Catering)</button>
     </div>
 
     <label class="menu-select-label" for="menuSelect">Or choose a category:</label>
     <select id="menuSelect" class="menu-select">
-      <option value="beef">🥩 Beef Suya</option>
-      <option value="chicken">🍗 Chicken Suya</option>
+      <option value="suya">🥩 Suya &amp; Jollof</option>
       <option value="kilishi">🥓 Kilishi</option>
-      <option value="platters">🍽️ Family Platters</option>
-      <option value="sides">🍚 Jollof &amp; Sides</option>
+      <option value="pans">🍽️ Whole Pans (Catering)</option>
     </select>
 
     <div class="menu-panels">
-      <div class="menu-panel active" data-cat="beef">
+      <div class="menu-panel active" data-cat="suya">
         <div class="menu-card">
           <div class="menu-card-art">
-            <img src="images/menu/beef-suya-grill.jpg" alt="Beef suya skewers on the grill" onerror="this.style.display='none'">
-            <div class="art-beef"></div>
-          </div>
-          <div class="menu-card-body">
-            <h3>Classic Beef Suya</h3>
-            <p>Thin-sliced beef, hand-skewered and rubbed in our house spice blend, grilled fresh over charcoal. Smoky, peppery, unapologetically bold.</p>
-            <span class="tag">Ask about today's price</span>
-          </div>
-        </div>
-        <div class="menu-card">
-          <div class="menu-card-art">
-            <img src="images/menu/beef-suya-plate.jpg" alt="Beef suya plated with jollof rice and onions" onerror="this.style.display='none'">
+            <img src="images/menu/beef-suya-plate.jpg" alt="Chopped suya with jollof rice" onerror="this.style.display='none'">
             <div class="art-beef2"></div>
           </div>
           <div class="menu-card-body">
-            <h3>Beef Suya Plate</h3>
-            <p>Grilled beef suya served over smoky jollof rice with fresh red onion and pepper — a customer favorite.</p>
-            <span class="tag">Ask about today's price</span>
+            <h3>Chopped Suya with Jollof Rice <span class="tag tag-best">#1 Best Seller</span></h3>
+            <p>Grilled spiced beef chunks over smoky jollof rice.</p>
+            <span class="tag">$20.00</span>
           </div>
         </div>
-      </div>
-
-      <div class="menu-panel" data-cat="chicken">
         <div class="menu-card">
           <div class="menu-card-art">
-            <img src="images/menu/chicken-suya.jpg" alt="Chicken suya skewers" onerror="this.style.display='none'">
-            <div class="art-chicken"></div>
+            <img src="images/menu/kilishi-onions.jpg" alt="Chopped suya with onions" onerror="this.style.display='none'">
+            <div class="art-kilishi"></div>
           </div>
           <div class="menu-card-body">
-            <h3>Chicken Suya</h3>
-            <p>Tender chicken skewers seasoned in the same signature spice rub, grilled until charred at the edges and juicy inside.</p>
-            <span class="tag">Ask about today's price</span>
+            <h3>Chopped Suya with Onions <span class="tag tag-best">#2 Best Seller</span></h3>
+            <p>Grilled spiced beef chunks paired with sliced red onions.</p>
+            <span class="tag">$15.00</span>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-art">
+            <img src="images/menu/beef-suya-grill.jpg" alt="Suya sticks on the grill with onions" onerror="this.style.display='none'">
+            <div class="art-beef"></div>
+          </div>
+          <div class="menu-card-body">
+            <h3>5 Sticks Suya with Onions <span class="tag tag-best">#3 Best Seller</span></h3>
+            <p>Five hand-skewered suya sticks, grilled fresh, served with sliced onions.</p>
+            <span class="tag">$16.00</span>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-art">
+            <img src="images/menu/family-platter.jpg" alt="Suya sticks with jollof rice" onerror="this.style.display='none'">
+            <div class="art-platter"></div>
+          </div>
+          <div class="menu-card-body">
+            <h3>5 Sticks with Jollof Rice</h3>
+            <p>Five suya sticks served over smoky jollof rice.</p>
+            <span class="tag">$21.00</span>
           </div>
         </div>
       </div>
@@ -217,47 +219,66 @@
       <div class="menu-panel" data-cat="kilishi">
         <div class="menu-card">
           <div class="menu-card-art">
-            <img src="images/menu/kilishi-onions.jpg" alt="Sliced beef kilishi with red onions" onerror="this.style.display='none'">
+            <img src="images/menu/kilishi-onions.jpg" alt="Kilishi, thinly sliced seasoned beef jerky" onerror="this.style.display='none'">
             <div class="art-kilishi"></div>
           </div>
           <div class="menu-card-body">
-            <h3>Beef Kilishi</h3>
-            <p>Thin, spice-crusted beef jerky made with peppers, ginger, Maggi seasoning and roasted peanuts — a Northern Nigerian specialty (about 125 cal per 8.5oz pack). Reviewers regularly call it the best kilishi they've had.</p>
-            <span class="tag">Ask about today's price</span>
+            <h3>Kilishi Per Pack (2.5oz)</h3>
+            <p>Thinly sliced, seasoned beef jerky with a spicy, savory coating — a Northern Nigerian specialty. Reviewers regularly call it the best kilishi they've had.</p>
+            <span class="tag">$6.50</span>
           </div>
         </div>
       </div>
 
-      <div class="menu-panel" data-cat="platters">
+      <div class="menu-panel" data-cat="pans">
         <div class="menu-card">
           <div class="menu-card-art">
-            <img src="images/menu/family-platter.jpg" alt="Family suya platter" onerror="this.style.display='none'">
+            <img src="images/catering/tray.jpg" alt="Whole catering pan of chopped suya" onerror="this.style.display='none'">
             <div class="art-platter"></div>
           </div>
           <div class="menu-card-body">
-            <h3>Family Suya Platter</h3>
-            <p>A shareable mix of beef and chicken suya, built for the table — great for gatherings and first-timers who want to try it all.</p>
-            <span class="tag">Ask about today's price</span>
+            <h3>1/2 Pan Chopped Suya</h3>
+            <p>A half pan of grilled chopped beef suya — built for sharing or catering a group.</p>
+            <span class="tag">$55.00</span>
           </div>
         </div>
-      </div>
-
-      <div class="menu-panel" data-cat="sides">
         <div class="menu-card">
           <div class="menu-card-art">
-            <img src="images/menu/jollof.jpg" alt="Jollof rice" onerror="this.style.display='none'">
+            <img src="images/catering/tray.jpg" alt="Whole catering pan of suya sticks" onerror="this.style.display='none'">
+            <div class="art-platter"></div>
+          </div>
+          <div class="menu-card-body">
+            <h3>1/2 Pan 20 Stick Suya</h3>
+            <p>Twenty hand-skewered suya sticks, grilled fresh — great for events.</p>
+            <span class="tag">$65.00</span>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-art">
+            <img src="images/catering/tray.jpg" alt="Half chopped, half stick suya combo pan" onerror="this.style.display='none'">
+            <div class="art-platter"></div>
+          </div>
+          <div class="menu-card-body">
+            <h3>1/2 Chopped, 1/2 Stick</h3>
+            <p>A combo pan — half chopped suya, half suya sticks.</p>
+            <span class="tag">$60.00</span>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-art">
+            <img src="images/menu/jollof.jpg" alt="Half pan of jollof rice" onerror="this.style.display='none'">
             <div class="art-jollof"></div>
           </div>
           <div class="menu-card-body">
-            <h3>Jollof Rice</h3>
-            <p>Smoky, tomato-rich West African jollof rice — the perfect base for a suya platter.</p>
-            <span class="tag">Ask about today's price</span>
+            <h3>1/2 Pan Jollof Rice</h3>
+            <p>Smoky, tomato-rich West African jollof rice, by the half pan.</p>
+            <span class="tag">$45.00</span>
           </div>
         </div>
       </div>
     </div>
 
-    <p class="menu-note">Menu items and pricing may change — call <a href="tel:+14105701530">(410) 570-1530</a> to confirm, or order directly through DoorDash / Uber Eats above.</p>
+    <p class="menu-note">Prices pulled directly from our DoorDash listing and set by the merchant — they may change. Call <a href="tel:+14105701530">(410) 570-1530</a> to confirm, or order directly through DoorDash / Uber Eats above.</p>
   </div>
 </section>
 
@@ -320,20 +341,20 @@
         <div class="tile-art art-kilishi"></div>
         <div class="tile-overlay"><span>Kilishi</span></div>
       </div>
-      <div class="gallery-tile" data-caption="Chicken suya, charred at the edges, juicy inside.">
-        <img class="tile-photo" src="images/gallery/chicken-suya.jpg" alt="Chicken suya" onerror="this.style.display='none'">
+      <div class="gallery-tile" data-caption="5 Sticks with Jollof Rice — suya sticks served over smoky jollof.">
+        <img class="tile-photo" src="images/menu/family-platter.jpg" alt="Suya sticks with jollof rice" onerror="this.style.display='none'">
         <div class="tile-art art-chicken"></div>
-        <div class="tile-overlay"><span>Chicken Suya</span></div>
+        <div class="tile-overlay"><span>Sticks &amp; Jollof</span></div>
       </div>
       <div class="gallery-tile" data-caption="A full catering tray, ready for the next event.">
         <img class="tile-photo" src="images/gallery/catering-tray.jpg" alt="Catering tray of suya" onerror="this.style.display='none'">
         <div class="tile-art art-platter"></div>
         <div class="tile-overlay"><span>Catering Tray</span></div>
       </div>
-      <div class="gallery-tile" data-caption="Our packaged kilishi snacks, made by Ishaku Foods Inc.">
-        <img class="tile-photo" src="images/gallery/product-package.jpg" alt="Malam Ishaku Suya packaged kilishi snacks" onerror="this.style.display='none'">
+      <div class="gallery-tile" data-caption="More from our kitchen — house-made and ready to go.">
+        <img class="tile-photo" src="images/gallery/product-package.jpg" alt="Malam Ishaku Suya house-made food, packaged" onerror="this.style.display='none'">
         <div class="tile-art art-package"></div>
-        <div class="tile-overlay"><span>Packaged Snacks</span></div>
+        <div class="tile-overlay"><span>From Our Kitchen</span></div>
       </div>
     </div>
     <p class="menu-note">More photos from our kitchen, events and menu are added regularly — follow us on <a href="https://www.instagram.com/ishakusuya/" target="_blank" rel="noopener">Instagram</a> and <a href="https://www.facebook.com/ishakusuya" target="_blank" rel="noopener">Facebook</a> for the latest.</p>
@@ -345,7 +366,7 @@
   <div class="container">
     <p class="eyebrow center light">Customer Love</p>
     <h2 class="center light">What People Are Saying</h2>
-    <p class="section-sub center light">4.9★ on Google &amp; across Yelp, Restaurant Guru and Birdeye (149+ reviews).</p>
+    <p class="section-sub center light">4.9★ on Google, DoorDash &amp; Uber Eats, plus Yelp, Restaurant Guru &amp; Birdeye (149+ reviews across platforms).</p>
 
     <div class="review-carousel">
       <button class="carousel-btn prev" id="prevReview" aria-label="Previous review">‹</button>
@@ -358,7 +379,52 @@
               <div class="art-beef review-fallback" aria-hidden="true"></div>
             </div>
             <p class="stars">★★★★★</p>
+            <p class="quote">"This is the BEST Suya and Jollof I have ever had. I will be spending a lot of money here. Super good!"</p>
+            <footer>— Geoffrey C., DoorDash review</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-photo">
+              <img src="images/reviews/review-2.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="art-kilishi review-fallback" aria-hidden="true"></div>
+            </div>
+            <p class="stars">★★★★★</p>
+            <p class="quote">"It was amazing! Very spicy so be careful, but the steak was ssssoooo flavorful I couldn't stop eating it. Def going back!"</p>
+            <footer>— DeMarkus T., DoorDash order</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-photo">
+              <img src="images/reviews/review-3.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="art-jollof review-fallback" aria-hidden="true"></div>
+            </div>
+            <p class="stars">★★★★★</p>
+            <p class="quote">"Guys I opened this food and my mouth dropped open. The size of what I got is so great for the price. It's more than fair…"</p>
+            <footer>— Michelle I., DoorDash order</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-photo">
+              <img src="images/reviews/review-4.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="art-package review-fallback" aria-hidden="true"></div>
+            </div>
+            <p class="stars">★★★★★</p>
+            <p class="quote">"It transports you back to Nigeria with every bite. The family that owns Malam Ishaku Suya are the kindest and nicest people you will ever meet."</p>
+            <footer>— Google reviewer</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-photo">
+              <img src="images/reviews/review-5.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="art-platter review-fallback" aria-hidden="true"></div>
+            </div>
+            <p class="stars">★★★★★</p>
             <p class="quote">"This is the best suya in the Western Hemisphere, period — soft, with the perfect amount of spice and heat."</p>
+            <footer>— Restaurant Guru reviewer</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-photo">
+              <img src="images/reviews/review-1.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="art-beef2 review-fallback" aria-hidden="true"></div>
+            </div>
+            <p class="stars">★★★★★</p>
+            <p class="quote">"If you've had suya before and you're not getting it from Malam Ishaku, you're not eating real suya."</p>
             <footer>— Restaurant Guru reviewer</footer>
           </blockquote>
           <blockquote class="review-card">
@@ -367,8 +433,8 @@
               <div class="art-kilishi review-fallback" aria-hidden="true"></div>
             </div>
             <p class="stars">★★★★★</p>
-            <p class="quote">"If you've had suya before and you're not getting it from Malam Ishaku, you're not eating real suya."</p>
-            <footer>— Restaurant Guru reviewer</footer>
+            <p class="quote">"Best kilishi I've had, bar none. The suya is fantastic too."</p>
+            <footer>— Yelp reviewer</footer>
           </blockquote>
           <blockquote class="review-card">
             <div class="review-photo">
@@ -376,26 +442,8 @@
               <div class="art-jollof review-fallback" aria-hidden="true"></div>
             </div>
             <p class="stars">★★★★★</p>
-            <p class="quote">"Best kilishi I've had, bar none. The suya is fantastic too."</p>
-            <footer>— Yelp reviewer</footer>
-          </blockquote>
-          <blockquote class="review-card">
-            <div class="review-photo">
-              <img src="images/reviews/review-4.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="art-chicken review-fallback" aria-hidden="true"></div>
-            </div>
-            <p class="stars">★★★★★</p>
             <p class="quote">"Smoky. Spicy. Flavorful. Exactly what suya should taste like."</p>
             <footer>— Yelp reviewer</footer>
-          </blockquote>
-          <blockquote class="review-card">
-            <div class="review-photo">
-              <img src="images/reviews/review-5.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="art-platter review-fallback" aria-hidden="true"></div>
-            </div>
-            <p class="stars">★★★★★</p>
-            <p class="quote">"Hospitable staff, prompt service, and an inviting atmosphere every time."</p>
-            <footer>— Google &amp; Birdeye reviews summary</footer>
           </blockquote>
         </div>
       </div>

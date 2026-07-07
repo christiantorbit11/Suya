@@ -376,6 +376,14 @@ img { max-width: 100%; display: block; }
   padding: .35em .8em;
   border-radius: 999px;
 }
+.tag-best {
+  color: var(--gold);
+  background: rgba(232, 163, 61, .14);
+  margin-left: .5em;
+  vertical-align: middle;
+  font-family: 'Poppins', sans-serif;
+}
+.menu-card-body h3 { display: flex; align-items: center; flex-wrap: wrap; gap: .3em; }
 .menu-note { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 2rem; }
 .menu-note a { color: var(--green); font-weight: 600; }
 
