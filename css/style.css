@@ -255,7 +255,7 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow);
   background: var(--green-light);
 }
-.photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 12%; }
 .photo-fallback {
   position: absolute; inset: 0;
   display: none;
@@ -737,9 +737,14 @@ img { max-width: 100%; display: block; }
   }
   .main-nav.open { transform: translateX(0); }
   .main-nav > ul { flex-direction: column; align-items: flex-start; gap: 1.3rem; }
-  .dropdown { position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; background: var(--green-light); margin-top: .5rem; display: none; }
+  .dropdown,
+  .has-dropdown:hover .dropdown,
+  .has-dropdown.open .dropdown {
+    position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; background: var(--green-light); margin-top: .5rem; display: none;
+  }
   .has-dropdown.open .dropdown { display: block; }
-  .header-actions .btn-call { display: none; }
+  .header-actions .btn-call { padding: .6em; width: 40px; height: 40px; justify-content: center; }
+  .header-actions .btn-call .call-text { display: none; }
   .header-actions .order-dropdown { display: none; }
   .hamburger { display: flex; }
   .menu-tabs { display: none; }
