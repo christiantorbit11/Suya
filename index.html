@@ -6,7 +6,7 @@
 <title>Malam Ishaku Suya | Authentic Nigerian Suya, Grill &amp; Catering in Glen Burnie, MD</title>
 <meta name="description" content="Malam Ishaku Suya — authentic, traditional, unforgettable Nigerian suya, kilishi &amp; catering in Glen Burnie, MD. Order online via DoorDash or Uber Eats, or call to book your next event.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -97,8 +97,17 @@
     </div>
 
     <div class="hero-art reveal" aria-hidden="true">
-      <div class="hero-photo-frame">
-        <img src="images/gallery/beef-suya-grill.jpg" alt="Beef suya sticks grilling over charcoal">
+      <div class="hero-photo-frame" id="heroParallax">
+        <span class="corner tl"></span><span class="corner br"></span>
+        <div class="live-badge"><span class="dot"></span> Live on the grill</div>
+        <video
+          autoplay muted loop playsinline
+          poster="images/hero-video-poster.jpg"
+          aria-label="Suya sticks grilling over charcoal, looping video">
+          <source src="videos/hero-suya-grill.webm" type="video/webm">
+          <source src="videos/hero-suya-grill.mp4" type="video/mp4">
+        </video>
+        <div class="frame-caption">▶ Suya sticks, straight off the grill</div>
       </div>
     </div>
   </div>
@@ -132,9 +141,9 @@
         <li>✅ Family-owned &amp; operated</li>
       </ul>
       <div class="about-stats">
-        <div class="stat"><strong>4.9★</strong><span>Google &amp; review average</span></div>
-        <div class="stat"><strong>149+</strong><span>Customer reviews</span></div>
-        <div class="stat"><strong>100%</strong><span>Charcoal-grilled, made to order</span></div>
+        <div class="stat"><strong class="countup" data-target="4.9" data-decimals="1" data-suffix="★">0★</strong><span>Google &amp; review average</span></div>
+        <div class="stat"><strong class="countup" data-target="149" data-suffix="+">0+</strong><span>Customer reviews</span></div>
+        <div class="stat"><strong class="countup" data-target="100" data-suffix="%">0%</strong><span>Charcoal-grilled, made to order</span></div>
       </div>
       <div class="award-badge">
         <img src="images/badge-businessrate.jpg" alt="BusinessRate 2025 Best of African Restaurant award" onerror="this.style.display='none'">

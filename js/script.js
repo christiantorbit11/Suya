@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ---------- Footer year ---------- */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -166,8 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
-  /* ---------- Scroll reveal animations ---------- */
-  const revealEls = document.querySelectorAll('.reveal');
+  /* ---------- Scroll reveal animations (also drives the catering stagger) ---------- */
+  const revealEls = document.querySelectorAll('.reveal, .catering-grid');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -180,6 +182,66 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => observer.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  /* ---------- Count-up stat numbers ---------- */
+  const countEls = document.querySelectorAll('.countup');
+  function formatCount(value, decimals, suffix) {
+    return value.toFixed(decimals) + suffix;
+  }
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const suffix = el.dataset.suffix || '';
+    if (prefersReducedMotion) {
+      el.textContent = formatCount(target, decimals, suffix);
+      return;
+    }
+    const duration = 1200;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      el.textContent = formatCount(target * eased, decimals, suffix);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  if (countEls.length) {
+    if ('IntersectionObserver' in window) {
+      const countObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            countObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      countEls.forEach(el => countObserver.observe(el));
+    } else {
+      countEls.forEach(el => animateCount(el));
+    }
+  }
+
+  /* ---------- Subtle hero video parallax ---------- */
+  const heroParallax = document.getElementById('heroParallax');
+  if (heroParallax && !prefersReducedMotion) {
+    let ticking = false;
+    const updateParallax = () => {
+      const rect = heroParallax.getBoundingClientRect();
+      const viewportMid = window.innerHeight / 2;
+      const offset = (rect.top + rect.height / 2 - viewportMid) * -0.06;
+      const clamped = Math.max(-18, Math.min(18, offset));
+      heroParallax.style.transform = `translateY(${clamped}px)`;
+      ticking = false;
+    };
+    document.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateParallax();
   }
 
 });
