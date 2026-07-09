@@ -2,6 +2,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- Full-screen video intro ---------- */
+  const intro = document.getElementById('siteIntro');
+  if (intro) {
+    if (prefersReducedMotion) {
+      intro.remove();
+    } else {
+      const INTRO_DURATION = 3500;
+      const FALLBACK_TIMEOUT = 6000; // in case the video never plays (slow network, blocked autoplay, etc.)
+      document.body.classList.add('intro-active');
+      let dismissed = false;
+
+      function endIntro() {
+        if (dismissed) return;
+        dismissed = true;
+        intro.classList.add('leaving');
+        document.body.classList.remove('intro-active');
+        setTimeout(() => intro.remove(), 1050);
+      }
+
+      const introTimer = setTimeout(endIntro, INTRO_DURATION);
+      const fallbackTimer = setTimeout(endIntro, FALLBACK_TIMEOUT);
+
+      document.getElementById('introSkip').addEventListener('click', () => {
+        clearTimeout(introTimer);
+        clearTimeout(fallbackTimer);
+        endIntro();
+      });
+      document.addEventListener('keydown', function introEscape(e) {
+        if (e.key === 'Escape') {
+          clearTimeout(introTimer);
+          clearTimeout(fallbackTimer);
+          endIntro();
+          document.removeEventListener('keydown', introEscape);
+        }
+      });
+      const introVideo = document.getElementById('introVideo');
+      if (introVideo) {
+        introVideo.addEventListener('error', () => { clearTimeout(introTimer); endIntro(); });
+      }
+    }
+  }
+
   /* ---------- Footer year ---------- */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();

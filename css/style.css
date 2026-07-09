@@ -771,6 +771,63 @@ img { max-width: 100%; display: block; }
   cursor: pointer; line-height: 1;
 }
 
+/* ===================== Intro splash ===================== */
+.site-intro {
+  position: fixed; inset: 0; z-index: 500;
+  background: #060504;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 1; visibility: visible;
+  transition: opacity 1s var(--ease), visibility 1s var(--ease);
+}
+.site-intro video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  transform: scale(1.02);
+}
+.site-intro-veil {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(0deg, rgba(6,5,4,.75) 0%, rgba(6,5,4,.15) 35%, rgba(6,5,4,.35) 100%),
+    radial-gradient(70% 60% at 50% 40%, transparent 40%, rgba(6,5,4,.55) 100%);
+}
+.site-intro-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  animation: intro-fade-in 1.4s var(--ease) both;
+}
+.intro-logo { filter: drop-shadow(0 8px 24px rgba(0,0,0,.5)); }
+.intro-logo svg { width: 72px; height: 72px; }
+.intro-tagline {
+  font-size: .78rem; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--gold-bright); margin: 0;
+}
+@keyframes intro-fade-in {
+  from { opacity: 0; transform: translateY(16px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.site-intro-skip {
+  position: absolute; z-index: 2; bottom: 28px; right: 28px;
+  background: rgba(0,0,0,.35); backdrop-filter: blur(6px);
+  border: 1px solid rgba(240,200,119,.4); color: var(--gold-bright);
+  padding: .6em 1.1em; border-radius: 999px;
+  font-size: .78rem; letter-spacing: .04em; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-weight: 600;
+  transition: border-color .2s ease, background .2s ease;
+}
+.site-intro-skip:hover { border-color: var(--gold-bright); background: rgba(0,0,0,.5); }
+.site-intro.leaving { opacity: 0; visibility: hidden; }
+.site-intro.leaving .site-intro-content { transform: scale(1.04); opacity: 0; transition: opacity .7s ease, transform .7s ease; }
+body.intro-active { overflow: hidden; height: 100vh; }
+
+@media (prefers-reduced-motion: reduce) {
+  .site-intro { display: none; }
+}
+@media (max-width: 560px) {
+  .intro-logo svg { width: 58px; height: 58px; }
+  .intro-tagline { font-size: .68rem; letter-spacing: .22em; }
+}
+
 /* ===================== African pattern accents ===================== */
 /* A woven-border strip, styled after kente cloth trim - frames the page top and bottom, drifting slowly. */
 .kente-strip {

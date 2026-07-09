@@ -11,6 +11,26 @@
 </head>
 <body>
 
+<!-- ================= INTRO ================= -->
+<div class="site-intro" id="siteIntro" role="dialog" aria-label="Intro">
+  <video id="introVideo" autoplay muted playsinline aria-hidden="true">
+    <source src="videos/hero-suya-grill.webm" type="video/webm">
+    <source src="videos/hero-suya-grill.mp4" type="video/mp4">
+  </video>
+  <div class="site-intro-veil"></div>
+  <div class="site-intro-content">
+    <span class="logo-mark intro-logo" aria-hidden="true">
+      <svg viewBox="0 0 100 100" width="64" height="64">
+        <rect x="2" y="2" width="96" height="96" rx="10" fill="#141310"/>
+        <path d="M18 16 H82 V26 Q82 34 58 34 V66 Q82 66 82 74 V84 H18 V74 Q18 66 42 66 V34 Q18 34 18 26 Z" fill="#ffffff"/>
+        <text x="50" y="58" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-weight="700" font-style="italic" fill="#4caf82" stroke="#0e3d24" stroke-width="1.1" paint-order="stroke fill">Suya</text>
+      </svg>
+    </span>
+    <p class="intro-tagline">Authentic &middot; Traditional &middot; Unforgettable</p>
+  </div>
+  <button class="site-intro-skip" id="introSkip" aria-label="Skip intro">Skip ✕</button>
+</div>
+
 <!-- ================= HEADER ================= -->
 <header class="site-header" id="siteHeader">
   <div class="kente-strip" aria-hidden="true"></div>
