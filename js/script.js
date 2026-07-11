@@ -48,13 +48,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Sticky header on scroll ---------- */
+  /* ---------- Sticky header, back-to-top, mobile bar, progress bar ---------- */
   const header = document.getElementById('siteHeader');
   const backToTop = document.getElementById('backToTop');
+  const mobileBar = document.getElementById('mobileActionBar');
+  const progressBar = document.createElement('div');
+  progressBar.className = 'scroll-progress';
+  document.body.appendChild(progressBar);
+
   const onScroll = () => {
     const scrolled = window.scrollY > 40;
     header.classList.toggle('scrolled', scrolled);
     backToTop.classList.toggle('show', window.scrollY > 500);
+    if (mobileBar) {
+      const show = window.scrollY > 560;
+      mobileBar.classList.toggle('show', show);
+      mobileBar.setAttribute('aria-hidden', String(!show));
+    }
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = max > 0 ? `${(window.scrollY / max) * 100}%` : '0%';
   };
   document.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -136,11 +148,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- FAQ accordion ---------- */
   document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+    trigger.setAttribute('aria-expanded', 'false');
     trigger.addEventListener('click', () => {
       const item = trigger.parentElement;
       const wasOpen = item.classList.contains('open');
-      item.parentElement.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
+      item.parentElement.querySelectorAll('.accordion-item').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        item.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 
@@ -183,24 +202,34 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoplay();
   }
 
-  /* ---------- Gallery lightbox ---------- */
+  /* ---------- Gallery lightbox (with prev/next, keyboard, swipe) ---------- */
   const lightbox = document.getElementById('lightbox');
   const lightboxArt = document.getElementById('lightboxArt');
   const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxCounter = document.getElementById('lightboxCounter');
   const lightboxClose = document.getElementById('lightboxClose');
+  const galleryTiles = Array.from(document.querySelectorAll('.gallery-tile'));
+  let lightboxIndex = 0;
 
-  document.querySelectorAll('.gallery-tile').forEach(tile => {
+  function renderLightbox(index) {
+    lightboxIndex = (index + galleryTiles.length) % galleryTiles.length;
+    const tile = galleryTiles[lightboxIndex];
+    const photo = tile.querySelector('.tile-photo');
+    const photoLoaded = photo && photo.style.display !== 'none' && photo.complete && photo.naturalWidth > 0;
+    const artClass = tile.querySelector('.tile-art').className.split(' ').find(c => c.startsWith('art-'));
+    lightboxArt.className = 'lightbox-art';
+    if (photoLoaded) {
+      lightboxArt.innerHTML = `<img src="${photo.src}" alt="">`;
+    } else {
+      lightboxArt.innerHTML = `<div class="${artClass}" style="width:100%;height:100%;"></div>`;
+    }
+    lightboxCaption.textContent = tile.dataset.caption || '';
+    if (lightboxCounter) lightboxCounter.textContent = `${lightboxIndex + 1} / ${galleryTiles.length}`;
+  }
+
+  galleryTiles.forEach((tile, i) => {
     tile.addEventListener('click', () => {
-      const photo = tile.querySelector('.tile-photo');
-      const photoLoaded = photo && photo.style.display !== 'none' && photo.complete && photo.naturalWidth > 0;
-      const artClass = tile.querySelector('.tile-art').className.split(' ').find(c => c.startsWith('art-'));
-      lightboxArt.className = 'lightbox-art';
-      if (photoLoaded) {
-        lightboxArt.innerHTML = `<img src="${photo.src}" alt="">`;
-      } else {
-        lightboxArt.innerHTML = `<div class="${artClass}" style="width:100%;height:100%;"></div>`;
-      }
-      lightboxCaption.textContent = tile.dataset.caption || '';
+      renderLightbox(i);
       lightbox.classList.add('open');
     });
   });
@@ -208,7 +237,30 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeLightbox() { lightbox.classList.remove('open'); }
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  if (lightboxPrev) lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); renderLightbox(lightboxIndex - 1); });
+  if (lightboxNext) lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); renderLightbox(lightboxIndex + 1); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) {
+      if (e.key === 'Escape') closeLightbox();
+      return;
+    }
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') renderLightbox(lightboxIndex - 1);
+    else if (e.key === 'ArrowRight') renderLightbox(lightboxIndex + 1);
+  });
+
+  let touchStartX = null;
+  lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    touchStartX = null;
+    if (Math.abs(dx) > 50) renderLightbox(lightboxIndex + (dx < 0 ? 1 : -1));
+  }, { passive: true });
 
   /* ---------- Scroll reveal animations (also drives the catering stagger) ---------- */
   const revealEls = document.querySelectorAll('.reveal, .catering-grid');
@@ -284,6 +336,193 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: true });
     updateParallax();
+  }
+
+  /* ---------- Live open/closed status (America/New_York) ---------- */
+  // Weekly hours as minutes-from-midnight windows; index 0 = Sunday.
+  const WEEK_HOURS = [
+    [12 * 60, 16 * 60 + 40],  // Sun 12:00–4:40 PM
+    null,                     // Mon closed
+    [12 * 60, 17 * 60 + 40],  // Tue 12:00–5:40 PM
+    [11 * 60, 19 * 60 + 40],  // Wed
+    [11 * 60, 19 * 60 + 40],  // Thu
+    [11 * 60, 19 * 60 + 40],  // Fri
+    [11 * 60, 19 * 60 + 40]   // Sat
+  ];
+  const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  function minutesToLabel(mins) {
+    let h = Math.floor(mins / 60);
+    const m = mins % 60;
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return `${h}:${String(m).padStart(2, '0')} ${ampm}`;
+  }
+
+  function nyNow() {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false
+    }).formatToParts(new Date());
+    const get = (t) => parts.find(p => p.type === t)?.value;
+    const dayIdx = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
+    return { day: dayIdx, minutes: (parseInt(get('hour'), 10) % 24) * 60 + parseInt(get('minute'), 10) };
+  }
+
+  function updateOpenStatus() {
+    const pills = document.querySelectorAll('[data-open-status]');
+    if (!pills.length) return;
+    let state;
+    try {
+      const { day, minutes } = nyNow();
+      const today = WEEK_HOURS[day];
+      if (today && minutes >= today[0] && minutes < today[1]) {
+        state = { open: true, text: `Open now · closes ${minutesToLabel(today[1])}` };
+      } else if (today && minutes < today[0]) {
+        state = { open: false, text: `Closed · opens today ${minutesToLabel(today[0])}` };
+      } else {
+        for (let ahead = 1; ahead <= 7; ahead++) {
+          const next = WEEK_HOURS[(day + ahead) % 7];
+          if (next) {
+            const dayLabel = ahead === 1 ? 'tomorrow' : DAY_NAMES[(day + ahead) % 7];
+            state = { open: false, text: `Closed · opens ${dayLabel} ${minutesToLabel(next[0])}` };
+            break;
+          }
+        }
+      }
+    } catch (err) {
+      return; // leave pills hidden if timezone lookup fails
+    }
+    if (!state) return;
+    pills.forEach(pill => {
+      pill.hidden = false;
+      pill.classList.toggle('is-open', state.open);
+      pill.classList.toggle('is-closed', !state.open);
+      pill.querySelector('.status-text').textContent = state.text;
+    });
+  }
+  updateOpenStatus();
+  setInterval(updateOpenStatus, 60000);
+
+  /* ---------- Scrollspy: highlight the section in view ---------- */
+  const spySections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.main-nav > ul > li > a[href^="#"]');
+  if ('IntersectionObserver' in window && spySections.length && navLinks.length) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    spySections.forEach(s => spy.observe(s));
+  }
+
+  /* ---------- Blur-in reveal for section headings ---------- */
+  const headingEls = document.querySelectorAll('section h2');
+  if ('IntersectionObserver' in window && !prefersReducedMotion) {
+    const headingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          headingObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    headingEls.forEach(h => { h.classList.add('reveal-blur'); headingObserver.observe(h); });
+  }
+
+  /* ---------- 3D tilt on menu cards (mouse only) ---------- */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !prefersReducedMotion) {
+    document.querySelectorAll('.menu-card').forEach(card => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `translateY(-8px) perspective(800px) rotateX(${(-py * 5).toFixed(2)}deg) rotateY(${(px * 6).toFixed(2)}deg)`;
+      });
+      card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  /* ---------- Ambient ember particles in the hero ---------- */
+  const heroSection = document.querySelector('.hero');
+  if (heroSection && !prefersReducedMotion) {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'ember-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    heroSection.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    let w = 0, h = 0, embers = [], running = false, rafId = null;
+    const EMBER_COUNT = 26;
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = heroSection.clientWidth;
+      h = heroSection.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function spawn(scattered) {
+      return {
+        x: Math.random() * w,
+        y: scattered ? Math.random() * h : h + 8,
+        r: 0.8 + Math.random() * 2,
+        speed: 0.22 + Math.random() * 0.5,
+        sway: Math.random() * Math.PI * 2,
+        swayAmp: 0.15 + Math.random() * 0.45,
+        alpha: 0.2 + Math.random() * 0.4,
+        gold: Math.random() > 0.35 // gold vs deeper orange embers
+      };
+    }
+
+    function tick() {
+      if (!running) return;
+      ctx.clearRect(0, 0, w, h);
+      for (const e of embers) {
+        e.y -= e.speed;
+        e.sway += 0.012;
+        e.x += Math.sin(e.sway) * e.swayAmp * 0.5;
+        if (e.y < -10 || e.x < -12 || e.x > w + 12) Object.assign(e, spawn(false));
+        const heightFade = Math.min(1, e.y / (h * 0.28)); // fade out near the top
+        const a = e.alpha * heightFade;
+        if (a <= 0.01) continue;
+        const grad = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, e.r * 3.2);
+        const core = e.gold ? '240,200,119' : '224,130,60';
+        grad.addColorStop(0, `rgba(${core},${a})`);
+        grad.addColorStop(1, `rgba(${core},0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, e.r * 3.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      rafId = requestAnimationFrame(tick);
+    }
+    function stop() {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    }
+
+    resize();
+    embers = Array.from({ length: EMBER_COUNT }, () => spawn(true));
+    window.addEventListener('resize', () => { resize(); }, { passive: true });
+    document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach(entry => entry.isIntersecting ? start() : stop());
+      }, { threshold: 0 }).observe(heroSection);
+    } else {
+      start();
+    }
   }
 
 });

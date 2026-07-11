@@ -705,7 +705,7 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
   transition: max-height .3s ease, padding .3s ease;
 }
-.accordion-item.open .accordion-panel { max-height: 200px; padding-bottom: 1.2em; }
+.accordion-item.open .accordion-panel { max-height: 340px; padding-bottom: 1.2em; }
 .accordion-panel p { color: var(--muted); font-size: .93rem; margin: 0; }
 
 /* ===================== CTA band ===================== */
@@ -770,6 +770,93 @@ img { max-width: 100%; display: block; }
   background: none; border: none; color: #fff; font-size: 2rem;
   cursor: pointer; line-height: 1;
 }
+
+/* ===================== Live open/closed status ===================== */
+.status-pill {
+  display: inline-flex; align-items: center; gap: .5em;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .3em .85em;
+  font-size: .78rem; font-weight: 600; letter-spacing: .02em;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  vertical-align: middle;
+}
+.status-pill .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.status-pill.is-open .status-dot { background: #3ddc84; box-shadow: 0 0 8px #3ddc84; animation: pulse-dot 1.8s ease-in-out infinite; }
+.status-pill.is-open { border-color: rgba(61,220,132,.35); color: #bfe8d2; }
+.status-pill.is-closed .status-dot { background: var(--gold); box-shadow: 0 0 6px rgba(211,162,74,.6); }
+.status-pill.is-closed { color: var(--gold-bright); }
+.hours-table + .status-pill, strong .status-pill { margin-left: .6em; }
+
+/* ===================== Ember particles ===================== */
+.ember-canvas {
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===================== Scroll progress ===================== */
+.scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--green-bright), var(--gold));
+  z-index: 180;
+  pointer-events: none;
+  transition: width .1s linear;
+}
+
+/* ===================== Scrollspy active nav ===================== */
+.main-nav a.active { color: var(--gold-bright); }
+.main-nav a.active::after { transform: scaleX(1); }
+
+/* ===================== Sticky mobile action bar ===================== */
+.mobile-action-bar {
+  display: none;
+  position: fixed; left: 0; right: 0; bottom: 0;
+  z-index: 95;
+  background: rgba(11,10,8,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+  padding: .7rem .9rem calc(.7rem + env(safe-area-inset-bottom, 0px));
+  gap: .7rem;
+  transform: translateY(110%);
+  transition: transform .35s var(--ease);
+}
+.mobile-action-bar.show { transform: translateY(0); }
+.mab-btn {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center; gap: .4em;
+  padding: .85em .5em;
+  border-radius: 6px;
+  font-weight: 700; font-size: .85rem; letter-spacing: .02em;
+  font-family: 'Inter', sans-serif;
+}
+.mab-order { background: linear-gradient(120deg, var(--green-bright), var(--gold)); color: #171008; }
+.mab-call { border: 1px solid var(--line); color: var(--gold-bright); background: rgba(255,255,255,.03); }
+
+/* ===================== Lightbox nav ===================== */
+.lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2;
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(0,0,0,.45); backdrop-filter: blur(6px);
+  color: var(--gold-bright); font-size: 1.7rem; line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s ease, background .2s ease;
+}
+.lightbox-nav:hover { border-color: var(--gold); background: rgba(0,0,0,.65); }
+.lightbox-nav.prev { left: 22px; }
+.lightbox-nav.next { right: 22px; }
+.lightbox-counter { color: var(--muted); font-size: .8rem; letter-spacing: .12em; margin-top: .4rem; font-variant-numeric: tabular-nums; }
+
+/* ===================== Blur-in headline reveal ===================== */
+.reveal-blur { opacity: 0; filter: blur(8px); transform: translateY(14px); transition: opacity .9s var(--ease), filter .9s var(--ease), transform .9s var(--ease); }
+.reveal-blur.in-view { opacity: 1; filter: blur(0); transform: translateY(0); }
 
 /* ===================== Intro splash ===================== */
 .site-intro {
@@ -875,10 +962,15 @@ body.intro-active { overflow: hidden; height: 100vh; }
   .kente-strip { animation: none; }
   .hero-photo-frame .live-badge .dot { animation: none; }
   .reveal { transition: none; opacity: 1; transform: none; }
+  .reveal-blur { transition: none; opacity: 1; filter: none; transform: none; }
   .btn::before { display: none; }
   .menu-panel.active .menu-card { animation: none; }
   .catering-grid.in-view .catering-item { transition: none; opacity: 1; transform: none; }
   #heroParallax { transform: none !important; }
+  .status-pill.is-open .status-dot { animation: none; }
+  .ember-canvas { display: none; }
+  .scroll-progress { display: none; }
+  .mobile-action-bar { transition: none; }
 }
 
 /* ===================== Responsive ===================== */
@@ -912,6 +1004,8 @@ body.intro-active { overflow: hidden; height: 100vh; }
   .menu-select-label, .menu-select { display: block; text-align: center; }
   .menu-select { width: 100%; }
   .order-toggle { font-size: .88rem; padding: .7em 1.2em; }
+  .mobile-action-bar { display: flex; }
+  .back-to-top { bottom: 88px; }
 }
 
 @media (max-width: 560px) {
