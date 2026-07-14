@@ -1071,7 +1071,44 @@ body.intro-active { overflow: hidden; height: 100vh; }
   letter-spacing: .06em;
   text-transform: uppercase;
 }
-.about-inner { grid-template-columns: 1.22fr .78fr; border-top: 1px solid var(--line); padding-top: 3rem; }
+.about-inner { grid-template-columns: 1fr; border-top: 1px solid var(--line); padding-top: 3rem; }
+.about-inner .about-copy { max-width: 760px; margin: 0 auto; text-align: center; }
+.about-inner .check-list { text-align: left; display: inline-flex; }
+.about-inner .about-stats { justify-content: center; }
+.about-inner .award-badge { margin-left: auto; margin-right: auto; text-align: left; }
+
+/* About feature: portrait above the owner quote */
+.about-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.8rem;
+  padding-bottom: 3rem;
+}
+.about-feature .about-art { display: flex; justify-content: center; }
+.about-feature .owner-quote-feature { padding-bottom: 0; margin: 0 auto; }
+.about-feature .owner-quote-feature::before { margin-left: auto; margin-right: auto; }
+
+.recipe-stamp {
+  position: absolute;
+  top: -14px; right: -18px;
+  z-index: 4;
+  width: 92px; height: 92px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold) 70%);
+  color: #171008;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: .62rem;
+  line-height: 1.2;
+  letter-spacing: .01em;
+  transform: rotate(9deg);
+  box-shadow: 0 10px 26px rgba(0,0,0,.5), 0 0 0 3px var(--bg-2), 0 0 0 4px var(--gold-bright);
+  padding: .4em;
+}
 
 /* Menu: first card in each category becomes a wide horizontal feature */
 @media (min-width: 901px) {
@@ -1167,7 +1204,79 @@ body.intro-active { overflow: hidden; height: 100vh; }
   .faq-grid { grid-template-columns: 1fr; gap: 1rem; }
   .faq-grid h3 { position: static; }
   .visit-info { padding: 1.6rem 1.4rem; }
-  .about-inner { grid-template-columns: 1fr; }
-  .about-art { order: 2; }
   .hero-strip .hero-facts { flex-direction: column; align-items: flex-start; }
+  .recipe-stamp { width: 76px; height: 76px; font-size: .56rem; top: -10px; right: -10px; }
+}
+
+/* ===================== Announcement bar ===================== */
+.announce-bar {
+  background: linear-gradient(90deg, var(--green), var(--green-bright));
+  color: #eafff2;
+  text-align: center;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  padding: .6em 1rem;
+}
+
+/* ===================== Ship banner ===================== */
+.ship-banner {
+  background: var(--bg-3);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1.1rem 1rem;
+}
+.ship-banner p {
+  margin: 0;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  letter-spacing: .01em;
+  color: var(--gold-bright);
+}
+
+/* ===================== Catering advance note ===================== */
+.catering-advance-note {
+  background: rgba(211,162,74,.1);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: .9rem 1.1rem;
+  margin: 1.4rem 0 0;
+  font-size: .92rem;
+  color: var(--text);
+}
+.catering-advance-note strong { color: var(--gold-bright); }
+
+/* ===================== Stand Out ===================== */
+.stand-out {
+  position: relative;
+  padding: 130px 0;
+  background-color: var(--bg);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.stand-out-veil {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(0deg, rgba(11,10,8,.94), rgba(11,10,8,.75) 55%, rgba(11,10,8,.4)),
+    radial-gradient(60% 70% at 50% 0%, rgba(211,162,74,.15), transparent 65%);
+}
+.stand-out-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; text-align: center; }
+.hungry-yet {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  color: var(--gold-bright);
+  text-shadow: 0 0 30px rgba(211,162,74,.5), 0 4px 20px rgba(0,0,0,.6);
+  margin: 0 0 .3em;
+  letter-spacing: .01em;
+}
+.stand-out h2 { color: var(--text); margin: 0 0 .6em; }
+.stand-out-copy { color: var(--text); font-size: 1.08rem; line-height: 1.7; max-width: 600px; margin: 0 auto 1.8em; }
+
+@media (max-width: 700px) {
+  .stand-out { padding: 90px 0; }
 }

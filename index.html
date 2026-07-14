@@ -35,9 +35,9 @@
   },
   "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "149" },
   "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "16:40" },
     { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "12:00", "closes": "17:40" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday"], "opens": "11:00", "closes": "19:40" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "16:40" }
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday"], "opens": "11:00", "closes": "19:40" }
   ],
   "menu": "https://www.doordash.com/store/malam-ishakusuya-glen-burnie-31478797/45159148/",
   "sameAs": [
@@ -69,6 +69,9 @@
   </div>
   <button class="site-intro-skip" id="introSkip" aria-label="Skip intro">Skip ✕</button>
 </div>
+
+<!-- ================= ANNOUNCEMENT BAR ================= -->
+<div class="announce-bar">📣 We've moved! Now at 509 McCormick Dr, Suite G, Glen Burnie, MD — the old Caton Ave address is no longer active.</div>
 
 <!-- ================= HEADER ================= -->
 <header class="site-header" id="siteHeader">
@@ -168,16 +171,29 @@
       <ul class="hero-facts">
         <li><span class="status-pill" data-open-status hidden><span class="status-dot"></span><span class="status-text"></span></span></li>
         <li>📍 509 McCormick Dr, Suite G, Glen Burnie, MD 21061</li>
-        <li>🕒 Wed–Sat 11am–7:40pm · Tue 12–5:40pm · Sun 12–4:40pm</li>
+        <li>🕒 Sun 12–4:40pm · Tue 12–5:40pm · Wed–Sat 11am–7:40pm</li>
         <li>✊🏾 Family-Owned &amp; Operated</li>
       </ul>
     </div>
   </div>
 </section>
 
+<!-- ================= SHIP BANNER ================= -->
+<div class="ship-banner"><p>We ship anywhere in the USA</p></div>
+
 <!-- ================= ABOUT / OWNER STORY ================= -->
 <section class="about" id="about">
-  <div class="container">
+  <div class="container about-feature">
+    <div class="about-art reveal">
+      <div class="photo-frame">
+        <img loading="lazy" decoding="async" src="images/owner-atam-ishaku.jpg" alt="Atam Ishaku, owner and operator of Malam Ishaku Suya" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="photo-fallback owner-fallback" aria-hidden="true">
+          <svg viewBox="0 0 100 100" width="70" height="70"><circle cx="50" cy="36" r="18" fill="#1c8a4b"/><path d="M15 90 C15 60 30 52 50 52 C70 52 85 60 85 90 Z" fill="#0b6b3a"/></svg>
+          <span>Atam Ishaku<br>Owner &amp; Operator</span>
+        </div>
+        <div class="recipe-stamp"><span>Family recipe<br>made the right way.</span></div>
+      </div>
+    </div>
     <blockquote class="owner-quote owner-quote-feature reveal">
       "I traveled home to Nigeria to learn how to make this exquisite suya cuisine from the experts and to develop the specific flavors of our spices."
       <footer>— Atam Ishaku, Owner &amp; Operator</footer>
@@ -187,7 +203,7 @@
     <div class="about-copy reveal">
       <p class="eyebrow">Our Story</p>
       <h2>A Family Recipe, Made the Real Way</h2>
-      <p>Malam Ishaku Suya is a family-owned Nigerian kitchen now based at 509 McCormick Dr, Suite G in Glen Burnie. Every skewer is hand-rubbed in our house spice blend — peppers, ginger, Maggi seasoning and roasted peanuts — then grilled fresh over charcoal, the traditional way.</p>
+      <p>Malam Ishaku Suya is a family-owned and operated Nigerian kitchen now based at 509 McCormick Dr, Suite G in Glen Burnie. Every skewer is hand-rubbed in our house spice blend — peppers, ginger, Maggi seasoning and roasted peanuts — then grilled fresh over charcoal, the traditional way.</p>
       <ul class="check-list">
         <li>✅ Authentic Nigerian flavors</li>
         <li>✅ Freshly grilled over charcoal</li>
@@ -203,15 +219,6 @@
       <div class="award-badge">
         <img loading="lazy" decoding="async" src="images/badge-businessrate.jpg" alt="BusinessRate 2025 Best of African Restaurant award" onerror="this.style.display='none'">
         <p><strong>Ranked #1 African Restaurant in Baltimore</strong><br>BusinessRate 2025, based on Google Reviews</p>
-      </div>
-    </div>
-    <div class="about-art reveal">
-      <div class="photo-frame">
-        <img loading="lazy" decoding="async" src="images/owner-atam-ishaku.jpg" alt="Atam Ishaku, owner and operator of Malam Ishaku Suya" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="photo-fallback owner-fallback" aria-hidden="true">
-          <svg viewBox="0 0 100 100" width="70" height="70"><circle cx="50" cy="36" r="18" fill="#1c8a4b"/><path d="M15 90 C15 60 30 52 50 52 C70 52 85 60 85 90 Z" fill="#0b6b3a"/></svg>
-          <span>Atam Ishaku<br>Owner &amp; Operator</span>
-        </div>
       </div>
     </div>
   </div>
@@ -335,6 +342,17 @@
   </div>
 </section>
 
+<!-- ================= STAND OUT ================= -->
+<section class="stand-out" id="stand-out" style="background-image: url('https://d8j0ntlcm91z4.cloudfront.net/user_3F9H1qsJYQsQN3jxdo1CRXo5vQV/hf_20260714_230656_b1281eac-3a2d-46b3-a53b-7ba7f18545fc.png');">
+  <div class="stand-out-veil"></div>
+  <div class="container stand-out-inner reveal">
+    <p class="hungry-yet">Hungry Yet?</p>
+    <h2>What Makes Our Products Stand Out?</h2>
+    <p class="stand-out-copy">The meat is sliced and seasoned with traditional northern Nigerian ingredients, marinated overnight and grilled to delicious perfection.</p>
+    <a href="#menu" class="btn btn-primary">See the Menu</a>
+  </div>
+</section>
+
 <!-- ================= CATERING ================= -->
 <section class="catering adire-texture on-light" id="catering">
   <div class="container catering-inner">
@@ -358,6 +376,8 @@
         <li>✅ Serving Maryland &amp; surrounding areas</li>
         <li>✅ Family-owned &amp; operated</li>
       </ul>
+
+      <p class="catering-advance-note">⏰ <strong>Please call 4–6 weeks in advance to secure your event date</strong> — this is important, as slots fill up fast.</p>
 
       <a href="tel:+14105701530" class="btn btn-primary">📞 Call Now to Book — (410) 570-1530</a>
     </div>
@@ -566,14 +586,18 @@
           <div><strong><a href="tel:+14105701530">(410) 570-1530</a></strong><p>Call or text to place your order.</p></div>
         </li>
         <li>
+          <span class="icon">💳</span>
+          <div><strong>Cash, Card, Zelle, or Cash App</strong><p>Zelle &amp; Cash App: <a href="tel:+14105701530">(410) 570-1530</a></p></div>
+        </li>
+        <li>
           <span class="icon">🕒</span>
           <div>
             <strong>Hours <span class="status-pill" data-open-status hidden><span class="status-dot"></span><span class="status-text"></span></span></strong>
             <table class="hours-table">
+              <tr><td>Sunday</td><td>12:00 PM – 4:40 PM</td></tr>
               <tr><td>Monday</td><td>Closed</td></tr>
               <tr><td>Tuesday</td><td>12:00 PM – 5:40 PM</td></tr>
               <tr><td>Wed – Sat</td><td>11:00 AM – 7:40 PM</td></tr>
-              <tr><td>Sunday</td><td>12:00 PM – 4:40 PM</td></tr>
             </table>
             <p class="hours-caveat">Hours may vary on holidays — please call to confirm.</p>
           </div>
