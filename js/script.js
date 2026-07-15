@@ -1,3 +1,20 @@
+/* ---------- Broken image fallback (CSP-safe replacement for inline onerror) ---------- */
+(function () {
+  function handleImgError(img) {
+    img.style.display = 'none';
+    if (img.hasAttribute('data-fallback-flex')) {
+      const sib = img.nextElementSibling;
+      if (sib) sib.style.display = 'flex';
+    }
+  }
+  document.addEventListener('error', (e) => {
+    if (e.target && e.target.tagName === 'IMG') handleImgError(e.target);
+  }, true);
+  document.querySelectorAll('img').forEach((img) => {
+    if (img.complete && img.naturalWidth === 0) handleImgError(img);
+  });
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
