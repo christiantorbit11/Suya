@@ -2,11 +2,11 @@
   "name": "malam-ishaku-suya-site",
   "private": true,
   "version": "1.0.0",
-  "description": "Static site for Malam Ishaku Suya. No build step is required to serve the site — css/style.min.css and js/script.min.js are committed, production-ready builds. Run `npm run build` after editing css/style.css or js/script.js to regenerate them.",
+  "description": "Static site for Malam Ishaku Suya. No build step is required to serve or deploy the site — css/style.min.css and js/script.min.js are committed, production-ready builds. Run `npm run minify` locally after editing css/style.css or js/script.js to regenerate them (this script is deliberately not named \"build\" so Vercel never auto-runs it).",
   "scripts": {
-    "build": "npm run build:css && npm run build:js",
-    "build:css": "clean-css-cli -o css/style.min.css css/style.css",
-    "build:js": "terser js/script.js -o js/script.min.js -c -m"
+    "minify": "npm run minify:css && npm run minify:js",
+    "minify:css": "cleancss -o css/style.min.css css/style.css",
+    "minify:js": "terser js/script.js -o js/script.min.js -c -m"
   },
   "devDependencies": {
     "clean-css-cli": "^5.6.3",
