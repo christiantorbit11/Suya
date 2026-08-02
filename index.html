@@ -10,6 +10,22 @@
 
   gtag('config', 'AW-18354152027');
 </script>
+<!-- Event snippet for Phone/Site conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-18354152027/YHBZCPm62NocENvE-K9E',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Malam Ishaku Suya | Authentic Nigerian Suya &amp; Kilishi in Glen Burnie, MD</title>
@@ -737,5 +753,6 @@
 </div>
 
 <script src="js/script.min.js"></script>
+<script src="js/conversion-tracking.min.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
   "scripts": {
     "minify": "npm run minify:css && npm run minify:js",
     "minify:css": "cleancss -o css/style.min.css css/style.css",
-    "minify:js": "terser js/script.js -o js/script.min.js -c -m"
+    "minify:js": "terser js/script.js -o js/script.min.js -c -m && terser js/conversion-tracking.js -o js/conversion-tracking.min.js -c -m"
   },
   "devDependencies": {
     "clean-css-cli": "^5.6.3",

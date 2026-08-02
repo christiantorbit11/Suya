@@ -10,29 +10,28 @@
 
   gtag('config', 'AW-18354152027');
 </script>
+<!-- Event snippet for Phone/Site conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-18354152027/YHBZCPm62NocENvE-K9E',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page Not Found | Malam Ishaku Suya</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="images/icons/favicon-32.png" sizes="32x32">
 <link rel="stylesheet" href="css/style.min.css">
-<style>
-  .error-page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    background: var(--bg);
-    color: var(--text);
-  }
-  .error-page .eyebrow { justify-content: center; }
-  .error-page h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin: .2em 0; }
-  .error-page p { color: var(--muted); max-width: 480px; margin: 0 auto 1.6em; }
-  .error-page .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-</style>
 </head>
 <body>
   <div class="error-page">
@@ -44,5 +43,6 @@
       <a href="tel:+14105701530" class="btn btn-outline">📞 (410) 570-1530</a>
     </div>
   </div>
+<script src="js/conversion-tracking.min.js"></script>
 </body>
 </html>
