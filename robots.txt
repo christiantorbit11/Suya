@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://suya-three.vercel.app/sitemap.xml
+Sitemap: https://www.malamishakusuya.org/sitemap.xml
