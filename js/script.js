@@ -123,22 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Order Online button dropdowns (click-to-toggle, click-outside-to-close)
-  document.querySelectorAll('.order-toggle').forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const parent = toggle.parentElement;
-      const wasOpen = parent.classList.contains('open');
-      document.querySelectorAll('.order-dropdown.open').forEach(el => el.classList.remove('open'));
-      parent.classList.toggle('open', !wasOpen);
-    });
-  });
-  document.addEventListener('click', (e) => {
-    document.querySelectorAll('.order-dropdown.open').forEach(el => {
-      if (!el.contains(e.target)) el.classList.remove('open');
-    });
-  });
-
   /* ---------- Menu category tabs + mobile select ---------- */
   const tabButtons = document.querySelectorAll('.tab-btn');
   const menuSelect = document.getElementById('menuSelect');

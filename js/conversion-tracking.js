@@ -2,7 +2,7 @@
    Fire-and-forget: never delays or blocks the click, so the call/order still
    goes through even if gtag.js is blocked (ad blockers, offline, etc.). */
 document.addEventListener('click', (e) => {
-  const orderLink = e.target.closest('a[href*="doordash.com"], a[href*="ubereats.com"]');
+  const orderLink = e.target.closest('a[href*="order.online"]');
   const telLink = e.target.closest('a[href^="tel:"]');
   if (!orderLink && !telLink) return;
 
