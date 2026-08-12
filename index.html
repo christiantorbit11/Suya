@@ -834,24 +834,24 @@ function gtag_report_conversion(url) {
 <script src="js/conversion-tracking.min.js"></script>
 <!-- Order.online smart button -->
 <script>
-  (function (e, t, r, n) {
-    var o, c, s;
-    o = e.document;
-    c = t.children[0];
-    s = o.createElement("script");
-    e.StorefrontSDKObject = "StorefrontSDK";
-    e[e.StorefrontSDKObject] = {
-      executeCommand: function (t, r) {
-        e[e.StorefrontSDKObject].buffer.push([t, r]);
-      },
-      buffer: []
-    };
-    s.async = 1;
-    s.src = 'https://web-apps.cdn4dd.com/webapps/sdk-storefront/latest/sdk.js';
-    t.insertBefore(s, c);
-  })(window, document.head);
+  function initOrderOnlineSmartButton() {
+    (function (e, t, r, n) {
+      var o, c, s;
+      o = e.document;
+      c = t.children[0];
+      s = o.createElement("script");
+      e.StorefrontSDKObject = "StorefrontSDK";
+      e[e.StorefrontSDKObject] = {
+        executeCommand: function (t, r) {
+          e[e.StorefrontSDKObject].buffer.push([t, r]);
+        },
+        buffer: []
+      };
+      s.async = 1;
+      s.src = 'https://web-apps.cdn4dd.com/webapps/sdk-storefront/latest/sdk.js';
+      t.insertBefore(s, c);
+    })(window, document.head);
 
-  function renderOrderOnlineButton() {
     StorefrontSDK.executeCommand('renderFloatingButton', {
       businessId: 11071911,
       businessSlug: 'Malam IshakuSuya',
@@ -866,8 +866,11 @@ function gtag_report_conversion(url) {
     });
   }
   /* Wait for the full-screen intro video to finish so the popup appears
-     when the site is actually opened, not hidden behind the intro overlay. */
-  document.addEventListener('site-intro-complete', renderOrderOnlineButton, { once: true });
+     when the site is actually opened, not hidden behind the intro overlay.
+     The bootstrap + first executeCommand call run together as one atomic
+     unit right when triggered, matching the vendor's snippet design (the
+     stub is only valid for calls made in the same tick it's created). */
+  document.addEventListener('site-intro-complete', initOrderOnlineSmartButton, { once: true });
 </script>
 </body>
 </html>
