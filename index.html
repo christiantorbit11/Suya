@@ -851,18 +851,23 @@ function gtag_report_conversion(url) {
     t.insertBefore(s, c);
   })(window, document.head);
 
-  StorefrontSDK.executeCommand('renderFloatingButton', {
-    businessId: 11071911,
-    businessSlug: 'Malam IshakuSuya',
-    floatingBar: true,
-    position: 'bottom',
-    buttonAlignment: 'center',
-    backgroundColor: 'transparent',
-    buttonBackgroundColor: '#3CA32A',
-    borderColor: 'transparent',
-    buttonText: 'Order Online',
-    showModal: true
-  });
+  function renderOrderOnlineButton() {
+    StorefrontSDK.executeCommand('renderFloatingButton', {
+      businessId: 11071911,
+      businessSlug: 'Malam IshakuSuya',
+      floatingBar: true,
+      position: 'bottom',
+      buttonAlignment: 'center',
+      backgroundColor: 'transparent',
+      buttonBackgroundColor: '#3CA32A',
+      borderColor: 'transparent',
+      buttonText: 'Order Online',
+      showModal: true
+    });
+  }
+  /* Wait for the full-screen intro video to finish so the popup appears
+     when the site is actually opened, not hidden behind the intro overlay. */
+  document.addEventListener('site-intro-complete', renderOrderOnlineButton, { once: true });
 </script>
 </body>
 </html>

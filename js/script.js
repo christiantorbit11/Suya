@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (intro) {
     if (prefersReducedMotion) {
       intro.remove();
+      document.dispatchEvent(new CustomEvent('site-intro-complete'));
     } else {
       const INTRO_DURATION = 3500;
       const FALLBACK_TIMEOUT = 6000; // in case the video never plays (slow network, blocked autoplay, etc.)
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dismissed = true;
         intro.classList.add('leaving');
         document.body.classList.remove('intro-active');
+        document.dispatchEvent(new CustomEvent('site-intro-complete'));
         setTimeout(() => intro.remove(), 1050);
       }
 
@@ -59,6 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
         introVideo.addEventListener('error', () => { clearTimeout(introTimer); endIntro(); });
       }
     }
+  } else {
+    document.dispatchEvent(new CustomEvent('site-intro-complete'));
   }
 
   /* ---------- Footer year ---------- */
