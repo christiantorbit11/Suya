@@ -65,6 +65,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.dispatchEvent(new CustomEvent('site-intro-complete'));
   }
 
+  /* ---------- Order now? popup ---------- */
+  const orderPopup = document.getElementById('orderPopup');
+  if (orderPopup) {
+    function openOrderPopup() {
+      orderPopup.hidden = false;
+      requestAnimationFrame(() => orderPopup.classList.add('show'));
+    }
+    function closeOrderPopup() {
+      orderPopup.classList.remove('show');
+      setTimeout(() => { orderPopup.hidden = true; }, 300);
+    }
+    document.addEventListener('site-intro-complete', openOrderPopup, { once: true });
+    document.getElementById('orderPopupClose').addEventListener('click', closeOrderPopup);
+    document.getElementById('orderPopupBackdrop').addEventListener('click', closeOrderPopup);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && orderPopup.classList.contains('show')) closeOrderPopup();
+    });
+  }
+
   /* ---------- Footer year ---------- */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();

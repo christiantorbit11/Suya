@@ -772,6 +772,55 @@ img { max-width: 100%; display: block; }
   cursor: pointer; line-height: 1;
 }
 
+/* ===================== Order now? popup ===================== */
+.order-popup {
+  position: fixed; inset: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.2rem;
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+.order-popup.show { opacity: 1; visibility: visible; }
+.order-popup-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(6,5,3,.82);
+  backdrop-filter: blur(4px);
+}
+.order-popup-card {
+  position: relative;
+  width: min(400px, 100%);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 2.4rem 2.2rem 2.2rem;
+  text-align: center;
+  box-shadow: 0 30px 70px rgba(0,0,0,.6), 0 0 0 1px rgba(211,162,74,.12);
+  transform: translateY(14px) scale(.97);
+  transition: transform .3s var(--ease);
+}
+.order-popup.show .order-popup-card { transform: translateY(0) scale(1); }
+.order-popup-close {
+  position: absolute; top: 14px; right: 16px;
+  background: none; border: none; color: var(--muted); font-size: 1.8rem;
+  cursor: pointer; line-height: 1; padding: .2em;
+  transition: color .2s ease;
+}
+.order-popup-close:hover { color: var(--gold-bright); }
+.order-popup-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: var(--text);
+  margin: 0 0 .3em;
+}
+.order-popup-sub { color: var(--muted); font-size: .95rem; margin: 0 0 1.6em; }
+.order-popup-btn { display: flex; width: 100%; justify-content: center; }
+.order-popup-btn + .order-popup-btn { margin-top: .8rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .order-popup, .order-popup-card { transition: none; }
+}
+
 /* ===================== Live open/closed status ===================== */
 .status-pill {
   display: inline-flex; align-items: center; gap: .5em;

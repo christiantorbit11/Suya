@@ -818,6 +818,18 @@ function gtag_report_conversion(url) {
   <a href="tel:+14105701530" class="mab-btn mab-call">📞 Call Now</a>
 </div>
 
+<!-- Order now? popup -->
+<div class="order-popup" id="orderPopup" role="dialog" aria-modal="true" aria-labelledby="orderPopupTitle" hidden>
+  <div class="order-popup-backdrop" id="orderPopupBackdrop"></div>
+  <div class="order-popup-card">
+    <button class="order-popup-close" id="orderPopupClose" aria-label="Close">×</button>
+    <p id="orderPopupTitle" class="order-popup-title">Order now?</p>
+    <p class="order-popup-sub">Skip the line and order online</p>
+    <a class="btn btn-primary order-popup-btn" href="https://order.online/store/~31478797/?hideModal=true&amp;delivery=true" target="_blank" rel="noopener">Order Delivery</a>
+    <a class="btn btn-outline order-popup-btn" href="https://order.online/store/~31478797/?hideModal=true&amp;pickup=true" target="_blank" rel="noopener">Order Pickup</a>
+  </div>
+</div>
+
 <!-- Lightbox modal -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
@@ -832,45 +844,5 @@ function gtag_report_conversion(url) {
 
 <script src="js/script.min.js"></script>
 <script src="js/conversion-tracking.min.js"></script>
-<!-- Order.online smart button -->
-<script>
-  function initOrderOnlineSmartButton() {
-    (function (e, t, r, n) {
-      var o, c, s;
-      o = e.document;
-      c = t.children[0];
-      s = o.createElement("script");
-      e.StorefrontSDKObject = "StorefrontSDK";
-      e[e.StorefrontSDKObject] = {
-        executeCommand: function (t, r) {
-          e[e.StorefrontSDKObject].buffer.push([t, r]);
-        },
-        buffer: []
-      };
-      s.async = 1;
-      s.src = 'https://web-apps.cdn4dd.com/webapps/sdk-storefront/latest/sdk.js';
-      t.insertBefore(s, c);
-    })(window, document.head);
-
-    StorefrontSDK.executeCommand('renderFloatingButton', {
-      businessId: 11071911,
-      businessSlug: 'Malam IshakuSuya',
-      floatingBar: true,
-      position: 'bottom',
-      buttonAlignment: 'center',
-      backgroundColor: 'transparent',
-      buttonBackgroundColor: '#3CA32A',
-      borderColor: 'transparent',
-      buttonText: 'Order Online',
-      showModal: true
-    });
-  }
-  /* Wait for the full-screen intro video to finish so the popup appears
-     when the site is actually opened, not hidden behind the intro overlay.
-     The bootstrap + first executeCommand call run together as one atomic
-     unit right when triggered, matching the vendor's snippet design (the
-     stub is only valid for calls made in the same tick it's created). */
-  document.addEventListener('site-intro-complete', initOrderOnlineSmartButton, { once: true });
-</script>
 </body>
 </html>
