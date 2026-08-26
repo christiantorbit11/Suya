@@ -297,7 +297,8 @@ img { max-width: 100%; display: block; }
   border-radius: 12px;
   max-width: 460px;
 }
-.award-badge img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.award-badge-icons { display: flex; gap: .4rem; flex-shrink: 0; }
+.award-badge img { width: 48px; height: 48px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
 .award-badge p { margin: 0; font-size: .85rem; color: var(--muted); line-height: 1.4; }
 .award-badge strong { color: var(--gold-bright); }
 
